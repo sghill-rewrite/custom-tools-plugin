@@ -15,10 +15,10 @@
  */
 package com.synopsys.arc.jenkinsci.plugins.customtools;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.EnvVars;
 import hudson.model.Node;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.CheckForNull;
 import jenkins.plugins.customtools.util.envvars.VariablesSubstitutionHelper;
 import jenkins.plugins.customtools.util.envvars.VariablesSubstitutionHelper.SimpleVariablesSubstitutionHelper;
 import org.kohsuke.accmod.Restricted;
@@ -51,12 +51,12 @@ public class EnvStringParseHelper {
     }
 
     @Deprecated
-    public static String resolveExportedPath(@CheckForNull String exportedPaths, @Nonnull EnvVars environment)  {
+    public static String resolveExportedPath(@CheckForNull String exportedPaths, @NonNull EnvVars environment)  {
         return HELPER.resolveVariable(exportedPaths, environment);
     }
 
     @Deprecated
-    public static String resolveExportedPath(@CheckForNull String exportedPaths, @Nonnull Node node) {
+    public static String resolveExportedPath(@CheckForNull String exportedPaths, @NonNull Node node) {
         return HELPER.resolveVariable(exportedPaths, node);
     }
 }

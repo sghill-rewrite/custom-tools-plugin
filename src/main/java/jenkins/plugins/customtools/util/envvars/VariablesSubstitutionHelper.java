@@ -16,6 +16,7 @@
 
 package jenkins.plugins.customtools.util.envvars;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.EnvVars;
 import hudson.model.Node;
 import hudson.slaves.EnvironmentVariablesNodeProperty;
@@ -25,8 +26,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 import java.util.Properties;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.CheckForNull;
 import jenkins.model.Jenkins;
 
 /**
@@ -56,7 +56,7 @@ public abstract class VariablesSubstitutionHelper {
      * @return Raw string
      * @since 0.3
      */
-    public String resolveVariable(@CheckForNull String inputValue, @Nonnull EnvVars environment)  {
+    public String resolveVariable(@CheckForNull String inputValue, @NonNull EnvVars environment)  {
         if (inputValue == null || !hasMacros(inputValue))
             return inputValue;
 
@@ -72,7 +72,7 @@ public abstract class VariablesSubstitutionHelper {
         return substitutedString;
     }
 
-    public String resolveVariable(@CheckForNull String inputValue, @Nonnull Node node) {
+    public String resolveVariable(@CheckForNull String inputValue, @NonNull Node node) {
         if (!hasMacros(inputValue))
             return inputValue;
 

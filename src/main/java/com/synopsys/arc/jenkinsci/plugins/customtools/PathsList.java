@@ -15,21 +15,22 @@
  */
 package com.synopsys.arc.jenkinsci.plugins.customtools;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
+
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.CheckForNull;
 
 /**
  * Structure with list
  * @author Oleg Nenashev
  */
 public class PathsList implements Serializable {
-    public @Nonnull List<String> paths;
+    public @NonNull List<String> paths;
     /*Restored home dir*/
     public @CheckForNull String homeDir;
     public @CheckForNull String pathSeparator;
@@ -42,7 +43,7 @@ public class PathsList implements Serializable {
      * @param paths List of paths to be returned
      * @param homeDir Home directory of the tool
      */
-    public PathsList(@Nonnull Collection<String> paths, @CheckForNull String homeDir) {
+    public PathsList(@NonNull Collection<String> paths, @CheckForNull String homeDir) {
         this(paths, File.pathSeparator, File.separator, homeDir);
     }
 
@@ -53,7 +54,7 @@ public class PathsList implements Serializable {
         this(new LinkedList<>(), null, null, null);
     }
 
-    public PathsList(@Nonnull Collection<String> paths,
+    public PathsList(@NonNull Collection<String> paths,
             @CheckForNull String pathSeparator, @CheckForNull String separator,
             @CheckForNull String homeDir) {
         this.paths = new ArrayList<>(paths);
@@ -66,7 +67,7 @@ public class PathsList implements Serializable {
         return homeDir;
     }
 
-    public boolean add(@Nonnull String path) {
+    public boolean add(@NonNull String path) {
         return paths.add(path);
     }
 
@@ -76,7 +77,7 @@ public class PathsList implements Serializable {
      * @return True if the paths list has been modified after the tool installation
      */
     //TODO: Is it a bug?
-    public boolean add(@Nonnull PathsList pathsList) {
+    public boolean add(@NonNull PathsList pathsList) {
         if (pathSeparator == null) {
             pathSeparator = pathsList.pathSeparator;
         }

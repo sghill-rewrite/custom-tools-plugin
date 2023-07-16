@@ -15,6 +15,7 @@
  */
 package com.synopsys.arc.jenkinsci.plugins.customtools;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.EnvVars;
 import hudson.Extension;
 import hudson.Util;
@@ -23,8 +24,7 @@ import hudson.model.Descriptor;
 import hudson.model.Label;
 import hudson.model.Node;
 import java.io.Serializable;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.CheckForNull;
 import jenkins.model.Jenkins;
 import jenkins.plugins.customtools.util.envvars.VariablesSubstitutionHelper;
 import org.kohsuke.stapler.DataBoundConstructor;
@@ -68,7 +68,7 @@ public class LabelSpecifics extends AbstractDescribableImpl<LabelSpecifics> impl
      * @param node Node to be checked
      * @return True if specifics is applicable to node
      */
-    public boolean appliesTo(@Nonnull Node node) {
+    public boolean appliesTo(@NonNull Node node) {
         String correctedLabel = Util.fixEmptyAndTrim(label);
         if (correctedLabel == null) {
             return true;
@@ -78,19 +78,19 @@ public class LabelSpecifics extends AbstractDescribableImpl<LabelSpecifics> impl
         return l == null || l.contains(node);
     }
 
-    public @Nonnull LabelSpecifics substitute(@Nonnull EnvVars vars) {
+    public @NonNull LabelSpecifics substitute(@NonNull EnvVars vars) {
         return new LabelSpecifics(label,
                 VariablesSubstitutionHelper.PROP_FILE.resolveVariable(additionalVars, vars),
                 VariablesSubstitutionHelper.PATH.resolveVariable(exportedPaths, vars));
     }
 
-    public @Nonnull LabelSpecifics substitute(@Nonnull Node node) {
+    public @NonNull LabelSpecifics substitute(@NonNull Node node) {
         return new LabelSpecifics(label,
                 VariablesSubstitutionHelper.PROP_FILE.resolveVariable(additionalVars, node),
                 VariablesSubstitutionHelper.PATH.resolveVariable(exportedPaths, node));
     }
 
-    public static @Nonnull LabelSpecifics[] substitute (LabelSpecifics[] specifics, @Nonnull EnvVars vars) {
+    public static @NonNull LabelSpecifics[] substitute (LabelSpecifics[] specifics, @NonNull EnvVars vars) {
         LabelSpecifics[] out = new LabelSpecifics[specifics.length];
         for (int i=0; i<specifics.length; i++) {
             out[i] = specifics[i].substitute(vars);
@@ -98,7 +98,7 @@ public class LabelSpecifics extends AbstractDescribableImpl<LabelSpecifics> impl
         return out;
     }
 
-    public static @Nonnull LabelSpecifics[] substitute (LabelSpecifics[] specifics, Node node) {
+    public static @NonNull LabelSpecifics[] substitute (LabelSpecifics[] specifics, Node node) {
         LabelSpecifics[] out = new LabelSpecifics[specifics.length];
         for (int i=0; i<specifics.length; i++) {
             out[i] = specifics[i].substitute(node);

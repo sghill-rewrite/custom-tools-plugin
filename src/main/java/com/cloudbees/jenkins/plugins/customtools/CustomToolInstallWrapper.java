@@ -23,6 +23,7 @@ import com.synopsys.arc.jenkinsci.plugins.customtools.LabelSpecifics;
 import com.synopsys.arc.jenkinsci.plugins.customtools.PathsList;
 import com.synopsys.arc.jenkinsci.plugins.customtools.multiconfig.MulticonfigWrapperOptions;
 import com.synopsys.arc.jenkinsci.plugins.customtools.versions.ToolVersion;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import hudson.AbortException;
 import hudson.EnvVars;
@@ -45,8 +46,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.CheckForNull;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
@@ -86,7 +86,7 @@ public class CustomToolInstallWrapper extends BuildWrapper {
             return tools != null ? tools.byName(name) : null;
         }
 
-        public @Nonnull CustomTool toCustomToolValidated() throws CustomToolException {
+        public @NonNull CustomTool toCustomToolValidated() throws CustomToolException {
             CustomTool tool = toCustomTool();
             if (tool == null) {
                 throw new CustomToolException(
@@ -96,7 +96,7 @@ public class CustomToolInstallWrapper extends BuildWrapper {
         }
     }
 
-    private final @Nonnull SelectedTool[] selectedTools;
+    private final @NonNull SelectedTool[] selectedTools;
     private final @CheckForNull MulticonfigWrapperOptions multiconfigOptions;
     private final boolean convertHomesToUppercase;
 
@@ -136,7 +136,7 @@ public class CustomToolInstallWrapper extends BuildWrapper {
         };
     }
 
-    public @Nonnull SelectedTool[] getSelectedTools() {
+    public @NonNull SelectedTool[] getSelectedTools() {
         return selectedTools.clone();
     }
 
@@ -285,8 +285,8 @@ public class CustomToolInstallWrapper extends BuildWrapper {
      * @throws CustomToolException
      * @since 0.4
      */
-    public void checkVersions (@Nonnull CustomTool tool, @Nonnull BuildListener listener,
-            @Nonnull EnvVars buildEnv, @Nonnull Node node, @Nonnull EnvVars target) throws CustomToolException {
+    public void checkVersions (@NonNull CustomTool tool, @NonNull BuildListener listener,
+            @NonNull EnvVars buildEnv, @NonNull Node node, @NonNull EnvVars target) throws CustomToolException {
         // Check version
         if (tool.hasVersions()) {
             ToolVersion version = ToolVersion.getEffectiveToolVersion(tool, buildEnv, node);
@@ -326,7 +326,7 @@ public class CustomToolInstallWrapper extends BuildWrapper {
      * @return Configured options. Returns default options if not specified.
      * @since 0.3
      */
-    public @Nonnull MulticonfigWrapperOptions getMulticonfigOptions() {
+    public @NonNull MulticonfigWrapperOptions getMulticonfigOptions() {
         return multiconfigOptions != null ? multiconfigOptions : MulticonfigWrapperOptions.DEFAULT;
     }
 

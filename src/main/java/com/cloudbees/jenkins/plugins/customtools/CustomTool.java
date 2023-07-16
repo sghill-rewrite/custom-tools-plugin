@@ -22,6 +22,7 @@ import com.synopsys.arc.jenkinsci.plugins.customtools.LabelSpecifics;
 import com.synopsys.arc.jenkinsci.plugins.customtools.PathsList;
 import com.synopsys.arc.jenkinsci.plugins.customtools.versions.ToolVersion;
 import com.synopsys.arc.jenkinsci.plugins.customtools.versions.ToolVersionConfig;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import hudson.AbortException;
 import hudson.EnvVars;
@@ -48,8 +49,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Arrays;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.CheckForNull;
 import jenkins.MasterToSlaveFileCallable;
 import jenkins.plugins.customtools.util.envvars.VariablesSubstitutionHelper;
 
@@ -93,7 +93,7 @@ public class CustomTool extends ToolInstallation implements
     private static final LabelSpecifics[] EMPTY_LABELS = new LabelSpecifics[0];
 
     @DataBoundConstructor
-    public CustomTool(@Nonnull String name, @CheckForNull String home,
+    public CustomTool(@NonNull String name, @CheckForNull String home,
             @CheckForNull List<? extends ToolProperty<?>> properties, @CheckForNull String exportedPaths,
             @CheckForNull LabelSpecifics[] labelSpecifics, @CheckForNull ToolVersionConfig toolVersion,
             @CheckForNull String additionalVariables) {
@@ -126,11 +126,11 @@ public class CustomTool extends ToolInstallation implements
         return (correctedHome != null) ? correctedHome : super.getHome();
     }
 
-    public void correctHome(@Nonnull PathsList pathList) {
+    public void correctHome(@NonNull PathsList pathList) {
         correctedHome = pathList.getHomeDir();
     }
 
-    public @Nonnull LabelSpecifics[] getLabelSpecifics() {
+    public @NonNull LabelSpecifics[] getLabelSpecifics() {
         return (labelSpecifics!=null) ? labelSpecifics : EMPTY_LABELS;
     }
 
@@ -159,7 +159,7 @@ public class CustomTool extends ToolInstallation implements
     }
 
     @Override
-    public @Nonnull CustomTool forNode(Node node, TaskListener log)
+    public @NonNull CustomTool forNode(Node node, TaskListener log)
             throws IOException, InterruptedException {
         String substitutedHomeDir = VariablesSubstitutionHelper.PATH.resolveVariable(translateFor(node, log), node);
         String substitutedPath = VariablesSubstitutionHelper.PATH.resolveVariable(exportedPaths, node);
@@ -198,7 +198,7 @@ public class CustomTool extends ToolInstallation implements
      * @return List of the specifics to be applied
      * @since 0.3
      */
-    public @Nonnull List<LabelSpecifics> getAppliedSpecifics(@Nonnull Node node) {
+    public @NonNull List<LabelSpecifics> getAppliedSpecifics(@NonNull Node node) {
         List<LabelSpecifics> out = new LinkedList<>();
         if (labelSpecifics != null) {
             for (LabelSpecifics spec : labelSpecifics) {
@@ -259,7 +259,7 @@ public class CustomTool extends ToolInstallation implements
      * @throws IOException Operation error
      * @throws InterruptedException Operation has been interrupted
      */
-    protected @Nonnull PathsList getPaths(@Nonnull Node node) throws IOException, InterruptedException {
+    protected @NonNull PathsList getPaths(@NonNull Node node) throws IOException, InterruptedException {
         final String toolHome = getHome();
         if (toolHome == null) {
             throw new FileNotFoundException("Cannot retrieve home directory of the custom tool " + getName());

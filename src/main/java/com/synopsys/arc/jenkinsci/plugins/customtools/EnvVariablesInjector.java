@@ -22,7 +22,8 @@ import java.io.StringReader;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.TreeMap;
-import javax.annotation.Nonnull;
+
+import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
@@ -40,7 +41,7 @@ public class EnvVariablesInjector extends TreeMap<String, EnvVariablesInjector.E
      * This method will be removed in future versions.
      */
     @SuppressFBWarnings(value = "NM_METHOD_NAMING_CONVENTION", justification = "Deprecated, will be removed later")
-    public static @Nonnull EnvVariablesInjector Create(@Nonnull String props) throws IOException {
+    public static @NonNull EnvVariablesInjector Create(@NonNull String props) throws IOException {
         return create(props);
     }
 
@@ -50,7 +51,7 @@ public class EnvVariablesInjector extends TreeMap<String, EnvVariablesInjector.E
      * @return A new injector
      * @throws IOException Cannot load properties from the string
      */
-    public static @Nonnull EnvVariablesInjector create(@Nonnull String props) throws IOException {
+    public static @NonNull EnvVariablesInjector create(@NonNull String props) throws IOException {
         Properties prop = new Properties();
         StringReader rdr = new StringReader(props);
         prop.load(rdr);
@@ -78,7 +79,7 @@ public class EnvVariablesInjector extends TreeMap<String, EnvVariablesInjector.E
      * @param target Target variables
      * @throws IOException Exception during modification of EnvVars
      */
-    public void injectVariables(@Nonnull EnvVars target) throws IOException {
+    public void injectVariables(@NonNull EnvVars target) throws IOException {
         for (Entry<String, EnvVariablesInjector.Entity> entry: entrySet()) {
             entry.getValue().injectVariables(target);
         }
@@ -129,7 +130,7 @@ public class EnvVariablesInjector extends TreeMap<String, EnvVariablesInjector.E
         * This method will be removed in future versions.
         */
         @SuppressFBWarnings(value = "NM_METHOD_NAMING_CONVENTION", justification = "Deprecated, will be removed later")
-       public void Inject(@Nonnull EnvVars target) throws IOException {
+       public void Inject(@NonNull EnvVars target) throws IOException {
            injectVariables(target);
        }
 
@@ -138,7 +139,7 @@ public class EnvVariablesInjector extends TreeMap<String, EnvVariablesInjector.E
         * @param target Target environment
         * @throws IOException Exception during modification of EnvVars
         */
-        public void injectVariables(@Nonnull EnvVars target) throws IOException {
+        public void injectVariables(@NonNull EnvVars target) throws IOException {
             //TODO: check overrides
             //TODO: check lists
             //TODO: substitute, check, etc.

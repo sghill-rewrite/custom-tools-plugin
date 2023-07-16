@@ -19,6 +19,7 @@ import com.cloudbees.jenkins.plugins.customtools.CustomTool;
 import com.cwctravel.hudson.plugins.extended_choice_parameter.ExtendedChoiceParameterDefinition;
 import com.cwctravel.hudson.plugins.extended_choice_parameter.ExtendedChoiceParameterValue;
 import com.synopsys.arc.jenkinsci.plugins.customtools.Messages;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Extension;
 import hudson.cli.CLICommand;
 import hudson.model.ParameterDefinition;
@@ -26,8 +27,7 @@ import hudson.model.ParameterValue;
 import hudson.model.StringParameterValue;
 import hudson.tools.ToolInstallation;
 import java.io.IOException;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.CheckForNull;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
@@ -70,7 +70,7 @@ public class ToolVersionParameterDefinition extends ParameterDefinition {
         return tool != null ? tool.getToolVersion() : null;
     }
 
-    private @Nonnull ExtendedChoiceParameterDefinition getVersionsListSource() {
+    private @NonNull ExtendedChoiceParameterDefinition getVersionsListSource() {
        ToolVersionConfig versionConfig = getVersionConfig();
         if (versionConfig == null) {
             throw new IllegalStateException(

@@ -16,7 +16,7 @@
 package com.synopsys.arc.jenkinsci.plugins.customtools;
 
 import java.util.Arrays;
-import javax.annotation.CheckForNull;
+import edu.umd.cs.findbugs.annotations.CheckForNull;
 
 /**
  * @author Oleg Nenashev

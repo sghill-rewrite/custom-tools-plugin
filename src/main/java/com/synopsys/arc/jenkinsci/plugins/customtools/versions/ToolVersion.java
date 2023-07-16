@@ -18,11 +18,11 @@ package com.synopsys.arc.jenkinsci.plugins.customtools.versions;
 import com.cloudbees.jenkins.plugins.customtools.CustomTool;
 import com.cwctravel.hudson.plugins.extended_choice_parameter.ExtendedChoiceParameterDefinition;
 import com.synopsys.arc.jenkinsci.plugins.customtools.EnvStringParseHelper;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.EnvVars;
 import hudson.model.Node;
 import java.io.Serializable;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.CheckForNull;
 
 /**
  * A stub for a tool versions.
@@ -45,7 +45,7 @@ public class ToolVersion implements Serializable {
         this(variableName, defaultVersion, null, null);
     }
 
-    private ToolVersion (@Nonnull ToolVersion defaultVersion, @CheckForNull String actualVersion,
+    private ToolVersion (@NonNull ToolVersion defaultVersion, @CheckForNull String actualVersion,
             @CheckForNull String versionSource) {
         this(defaultVersion.getVariableName(), defaultVersion.getDefaultVersion(), actualVersion, versionSource);
     }
@@ -87,7 +87,7 @@ public class ToolVersion implements Serializable {
      * @param tool Tool
      * @return The default version or null if the versioning is not configured.
      */
-    public static @CheckForNull ToolVersion getDefaultToolVersion(@Nonnull CustomTool tool) {
+    public static @CheckForNull ToolVersion getDefaultToolVersion(@NonNull CustomTool tool) {
         final ToolVersionConfig versionConfig = tool.getToolVersion();
         if (versionConfig == null) {
             return null;

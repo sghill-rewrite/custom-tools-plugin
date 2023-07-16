@@ -17,11 +17,11 @@ package com.synopsys.arc.jenkinsci.plugins.customtools.versions;
 
 import com.cloudbees.jenkins.plugins.customtools.CustomTool;
 import com.cwctravel.hudson.plugins.extended_choice_parameter.ExtendedChoiceParameterDefinition;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.tools.ToolInstallation;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import javax.annotation.Nonnull;
 
 /**
  * Provides helper for tool version handling.
@@ -55,7 +55,7 @@ public class ToolVersionHelper {
      * Gets list of versioned tools.
      * @return List of tools, which have versions specified
      */
-    public static @Nonnull List<CustomTool> getAllVersionedTools() {
+    public static @NonNull List<CustomTool> getAllVersionedTools() {
         CustomTool.DescriptorImpl tools = ToolInstallation.all().get(CustomTool.DescriptorImpl.class);
         List<CustomTool> res = new LinkedList<>();
         if (tools != null ) {
